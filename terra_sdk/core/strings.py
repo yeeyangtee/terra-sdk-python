@@ -30,25 +30,25 @@ def check_prefix_and_length(prefix: str, data: str, length: int):
 
 
 AccAddress = NewType("AccAddress", str)
-AccAddress.__doc__ = """Terra Bech32 Account Address -- type alias of str."""
+AccAddress.__doc__ = """akash Bech32 Account Address -- type alias of str."""
 
 ValAddress = NewType("ValAddress", str)
-ValAddress.__doc__ = """Terra Bech32 Validator Operator Address -- type alias of str."""
+ValAddress.__doc__ = """akash Bech32 Validator Operator Address -- type alias of str."""
 
 AccPubKey = NewType("AccPubKey", str)
-AccPubKey.__doc__ = """Terra Bech32 Account Address -- type alias of str."""
+AccPubKey.__doc__ = """akash Bech32 Account Address -- type alias of str."""
 
 ValPubKey = NewType("ValPubKey", str)
-ValPubKey.__doc__ = """Terra Bech32 Validator PubKey -- type alias of str."""
+ValPubKey.__doc__ = """akash Bech32 Validator PubKey -- type alias of str."""
 
 ValConsPubKey = NewType("ValConsPubKey", str)
 ValConsPubKey.__doc__ = (
-    """Terra Bech32 Validator Conensus PubKey -- type alias of str."""
+    """akash Bech32 Validator Conensus PubKey -- type alias of str."""
 )
 
 
 def is_acc_address(data: str) -> bool:
-    """Checks whether the given string is a properly formatted Terra account address.
+    """Checks whether the given string is a properly formatted akash account address.
 
     Args:
         data (str): string to check
@@ -56,7 +56,7 @@ def is_acc_address(data: str) -> bool:
     Returns:
         bool: whether the string is a proper account address
     """
-    return check_prefix_and_length("terra", data, 44)
+    return check_prefix_and_length("akash", data, 44)
 
 
 def to_acc_address(data: ValAddress) -> AccAddress:
@@ -74,11 +74,11 @@ def to_acc_address(data: ValAddress) -> AccAddress:
     vals = bech32_decode(data)
     if vals[1] is None:
         raise ValueError(f"invalid bech32: {data}")
-    return AccAddress(bech32_encode("terra", vals[1]))
+    return AccAddress(bech32_encode("akash", vals[1]))
 
 
 def is_val_address(data: str) -> bool:
-    """Checks whether the given string is a properly formatted Terra validator operator
+    """Checks whether the given string is a properly formatted akash validator operator
     address.
 
     Args:
@@ -87,7 +87,7 @@ def is_val_address(data: str) -> bool:
     Returns:
         bool: whether the string is a proper validator address
     """
-    return check_prefix_and_length("terravaloper", data, 51)
+    return check_prefix_and_length("akashvaloper", data, 51)
 
 
 def to_val_address(data: AccAddress) -> ValAddress:
@@ -105,11 +105,11 @@ def to_val_address(data: AccAddress) -> ValAddress:
     vals = bech32_decode(data)
     if vals[1] is None:
         raise ValueError(f"invalid bech32: {data}")
-    return ValAddress(bech32_encode("terravaloper", vals[1]))
+    return ValAddress(bech32_encode("akashvaloper", vals[1]))
 
 
 def is_acc_pubkey(data: str) -> bool:
-    """Checks whether the provided string is a properly formatted Terra account pubkey.
+    """Checks whether the provided string is a properly formatted akash account pubkey.
 
     Args:
         data (str): string to check
@@ -117,7 +117,7 @@ def is_acc_pubkey(data: str) -> bool:
     Returns:
         bool: whether string is account pubkey
     """
-    return check_prefix_and_length("terrapub", data, 76)
+    return check_prefix_and_length("akashpub", data, 76)
 
 
 def to_acc_pubkey(data: ValPubKey) -> AccPubKey:
@@ -135,11 +135,11 @@ def to_acc_pubkey(data: ValPubKey) -> AccPubKey:
     vals = bech32_decode(data)
     if vals[1] is None:
         raise ValueError(f"invalid bech32: {data}")
-    return AccPubKey(bech32_encode("terrapub", vals[1]))
+    return AccPubKey(bech32_encode("akashpub", vals[1]))
 
 
 def is_val_pubkey(data: str) -> bool:
-    """Checks whether provided string is a properly formatted Terra validator pubkey.
+    """Checks whether provided string is a properly formatted akash validator pubkey.
 
     Args:
         data (str): string to check
@@ -147,7 +147,7 @@ def is_val_pubkey(data: str) -> bool:
     Returns:
         bool: whether string is validator pubkey
     """
-    return check_prefix_and_length("terravaloperpub", data, 83)
+    return check_prefix_and_length("akashvaloperpub", data, 83)
 
 
 def to_val_pubkey(data: AccPubKey) -> ValPubKey:
@@ -165,11 +165,11 @@ def to_val_pubkey(data: AccPubKey) -> ValPubKey:
     vals = bech32_decode(data)
     if vals[1] is None:
         raise ValueError(f"invalid bech32: {data}")
-    return ValPubKey(bech32_encode("terravaloperpub", vals[1]))
+    return ValPubKey(bech32_encode("akashvaloperpub", vals[1]))
 
 
 def is_valcons_pubkey(data: str) -> ValConsPubKey:
-    """Checks whether provided string is a properly formatted Terra validator consensus
+    """Checks whether provided string is a properly formatted akash validator consensus
     pubkey.
 
     Args:
@@ -178,4 +178,4 @@ def is_valcons_pubkey(data: str) -> ValConsPubKey:
     Returns:
         ValConsPubKey: validator consensus pubkey
     """
-    return check_prefix_and_length("terravalconspub", data, 83)
+    return check_prefix_and_length("akashvalconspub", data, 83)
